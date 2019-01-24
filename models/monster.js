@@ -1,6 +1,7 @@
 class Monster { 
-	constructor(name, description, stats, weapons, actions, challenge_rating) {
+	constructor(name, hit_points, description, stats, weapons, actions, challenge_rating) {
 		this.name = name;
+		this.hit_points = hit_points;
 		this.description = description;
 		this.stats = stats;
 		this.weapons = weapons;

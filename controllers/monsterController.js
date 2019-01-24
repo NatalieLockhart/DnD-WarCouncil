@@ -8,7 +8,7 @@ class monsterController{
 	getMonster(res, monster){
 		return axios.get(`https://api-beta.open5e.com/monsters/${monster}/`)
 		  .then(response => {
-			var monster = new Monster(response.data.name, "it\'s a goblin", [], "weaponsHere", response.data.actions, response.data.challenge_rating);
+			var monster = new Monster(response.data.name, response.data.hit_points, "it\'s a goblin", [], "weaponsHere", response.data.actions, response.data.challenge_rating);
 			return monster;
 		  })
 	  .catch(error => { 
