@@ -16,6 +16,7 @@ describe('monsterController.getMonster(res, monster)', function (){
 			 
 		//2. ACT
 		mController.getMonster("", "goblin").then(function(response) {
+			//3. ASSERT
 			expect(response.name).to.equal(result1.name);
 		})
 		.catch(error => { 
