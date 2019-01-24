@@ -1,0 +1,26 @@
+{
+  "name": "dnd-warcouncil",
+  "version": "1.0.0",
+  "description": "For when you want to know how many kobolds it takes to kill a beholder. Roll initiative.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NatalieLockhart/DnD-WarCouncil.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NatalieLockhart/DnD-WarCouncil/issues"
+  },
+  "homepage": "https://github.com/NatalieLockhart/DnD-WarCouncil#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
+  }
+}
