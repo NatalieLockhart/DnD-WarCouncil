@@ -1,6 +1,7 @@
 var DungeonMaster = require('../controllers/dungeonMaster.js');
 var Monster = require('../models/monster.js');
 var expect = require('chai').expect;
+var mockJSONMonsterList = require('./mockJSONMonsterList.js');
 
 var dungeonMaster = new DungeonMaster("easy");
 
@@ -24,7 +25,7 @@ describe('dungeonMaster', function (){
             damage_bonus: 2
 	      };
 		
-		var mockMonster = new Monster("Goblin", "it\'s a goblin", [], "weaponsHere", [move1, move2], "1/4");
+		var mockMonster = new Monster(mockJSONMonsterList.monsterList[0]);
 		
 		//2. ACT
 		var result = dungeonMaster.pickRandomMove(mockMonster);
