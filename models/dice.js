@@ -3,6 +3,23 @@
 class Dice {
 	constructor () {}
 	
+	diceParser(diceType){
+		switch(diceType){
+		  case diceType = "20":
+		    return this.rollD20();
+		  case diceType = "12":
+		    return this.rollD12();
+		  case diceType = "10":
+		    return this.rollD10();
+		  case diceType = "8":
+		    return this.rollD8();
+		  case diceType = "6":
+		    return this.rollD6();
+		  default:
+		    return this.rollD4();
+		}
+	}
+	
 	//returns a number between 1 and 20
 	rollD20(){
 	  return Math.floor(Math.random() * 20) + 1;

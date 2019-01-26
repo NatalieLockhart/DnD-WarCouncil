@@ -4,6 +4,7 @@ var mockJSONMonsterList =
 {
     "name": "Goblin",
     "hit_points": 7,
+	"armor_class": 15,
     "strength": 8,
     "dexterity": 14,
     "constitution": 10,
@@ -38,6 +39,7 @@ var mockJSONMonsterList =
 {
     "name": "Tarrasque",
     "hit_points": 676,
+	"armor_class": 25,
     "strength": 30,
     "dexterity": 11,
     "constitution": 30,

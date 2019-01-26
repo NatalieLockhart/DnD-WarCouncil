@@ -32,7 +32,8 @@ describe('monster.constructor(monsterObject)', function (){
 		};
 		var mockMonster = new Monster({
 			name: "Goblin", 
-			hit_points: 7,    
+			hit_points: 7,   
+			armor_class: 15,
 			strength: 8,    
 			dexterity: 14,   
 			constitution: 10,   

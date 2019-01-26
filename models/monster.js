@@ -5,6 +5,7 @@ class Monster {
 		else{
 			this.name = monsterObject.name;
 			this.hit_points = monsterObject.hit_points;
+			this.armor_class = monsterObject.armor_class;
 			this.strength = monsterObject.strength;
 			this.dexterity = monsterObject.dexterity;
 			this.constitution = monsterObject.constitution;

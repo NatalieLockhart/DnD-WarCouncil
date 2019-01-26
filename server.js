@@ -24,7 +24,6 @@ app.get('/monsters/:monster', function(req, res) {
 });
 
 app.post("/simulate", function(request, response) {
-		console.log(request.body.monsterList);
 	   var parsedMonsters = monsterParser.parse(request.body.monsterList);
 	   response.send(cController.simulateFight(parsedMonsters));
  });
