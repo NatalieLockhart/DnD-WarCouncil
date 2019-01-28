@@ -41,7 +41,8 @@ describe('monster.constructor(monsterObject)', function (){
 			wisdom: 8,    
 			charisma: 8,    
 			actions: [move2, move1], 
-			challenge_rating: "1/4" 
+			challenge_rating: "1/4",
+			team: 1
 		});
 		
 		//2. ACT

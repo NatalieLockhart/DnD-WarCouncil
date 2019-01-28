@@ -34,7 +34,8 @@ var mockJSONMonsterList =
         }
     ],
     "challenge_rating": "1/4",
-    "initiative": 12
+    "initiative": 12,
+	"team": 1
 }, 
 {
     "name": "Tarrasque",
@@ -95,7 +96,8 @@ var mockJSONMonsterList =
         }
     ],
     "challenge_rating": "30",
-    "initiative": 2
+    "initiative": 2,
+	"team": 2
 }
 ]};
 

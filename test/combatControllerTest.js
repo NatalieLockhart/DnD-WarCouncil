@@ -7,8 +7,9 @@ var expect = require('chai').expect;
 var cController = new combatController();
 
 describe('combatController.simulateFight(monsterList)', function (){
-	it('should return a winner when a list of Monster objects is passed to it', function () {
+	it('should return the number of the winning team when a list of Monster objects is passed to it', function () {
 	
+		//1. ARRANGE
 		var monsterList = monsterParser.parse(mockJSONMonsterList.monsterList);
 		
 		//2. ACT
@@ -20,14 +21,15 @@ describe('combatController.simulateFight(monsterList)', function (){
 		
 		//3. ASSERT
 		//hint: the winner is always gonna be the tarrasque
-		expect(result.name).to.equal(winner.name);
+		expect(result).to.equal(winner.team);
 	});
 });
 
 describe('combatController.continueCombat(monsterList)', function (){
 	it('should return true when all monsters in the list have more than 0 health', function () {
 	
-		var monsterList = [{hit_points: 10}, {hit_points:11}, {hit_points: 1}];
+		//1. ARRANGE
+		var monsterList = [{hit_points: 10, team: 1}, {hit_points:11, team: 2}, {hit_points: 1, team:3}];
 		
 		//2. ACT
 		var result = cController.continueCombat(monsterList);
@@ -35,9 +37,7 @@ describe('combatController.continueCombat(monsterList)', function (){
 		//3. ASSERT
 		expect(result).to.be.true;
 	});
-});
-
-describe('combatController.continueCombat(monsterList)', function (){
+	
 	it('should return false when all monsters on one team have 0 health', function () {
 	
 		var monsterList = [{hit_points: 10, team: 1}, {hit_points:11, team: 1}, {hit_points: 0, team:2}, {hit_points:0, team:2}];
@@ -46,7 +46,7 @@ describe('combatController.continueCombat(monsterList)', function (){
 		var result = cController.continueCombat(monsterList);
 		
 		//3. ASSERT
-		expect(result).to.be.true;
+		expect(result).to.be.false;
 	});
 	
 	it('should return true when more than one team has at least one monster with health higher than 0', function () {

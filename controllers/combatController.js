@@ -46,15 +46,20 @@ class combatController {
 	return this.determineVictoriousTeam(monsterList);
   }
 	
-	//this will be a much more complicated check later. But for now, we'll just see if one of the two combatants is dead	
+	//check if there is more than one team with a living monster on it - if so, the battle is ongoing
 	continueCombat(monsterList){
+	  var livingTeam = 0;
 	  for(var a = 0; a < monsterList.length; a++){
-		  if(monsterList[a].hit_points <= 0){
-			  return false;
+		  if(monsterList[a].hit_points > 0){
+			  if(livingTeam == 0){
+			    livingTeam = monsterList[a].team;
+			  }
+			  if(monsterList[a].team != livingTeam){
+			    return true;
+			  }
 		  }
 	  }
-	  
-	  return true;
+	  return false;
 	}
 	
 	//for now, this is its own function until I figure out if extra logic will be needed. If not, i'll move it into the main simulateBattle() method
@@ -99,12 +104,13 @@ class combatController {
 	  return damage;
 	}
 
-	//this will be more complicated later. For now, we'll just return the survivor
+	//find the first surviving monster and return its team number.
+	//all monsters from other teams should have been defeated by now
 	determineVictoriousTeam(monsterList){
 		for(var c = 0; c < monsterList.length; c++){
-			if(monsterList[c].hit_points > 0) {return monsterList[c]};
+			if(monsterList[c].hit_points > 0) {return monsterList[c].team};
 		}
-		return monsterList[0];
+		return monsterList[0].team;
 	}		
 }
 
