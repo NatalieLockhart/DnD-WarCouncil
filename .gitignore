@@ -1,3 +1,7 @@
 ToDo.txt
 node_modules
 package-lock.json
+data/*
+
+!data/monsters.json
+!data/spells.json

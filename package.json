@@ -7,7 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+	"db" : "mongod --dbpath data",
+	"start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -20,11 +22,11 @@
   },
   "homepage": "https://github.com/NatalieLockhart/DnD-WarCouncil#readme",
   "devDependencies": {
-    "axios": "^0.18.0",
-    "axios-mock-adapter": "^1.16.0",
     "chai": "^4.2.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
-    "mocha": "^5.2.0"
+    "mocha": "^5.2.0",
+    "mongodb": "^3.1.13",
+    "monk": "^6.0.6"
   }
 }
