@@ -31,8 +31,9 @@ app.get('/monsters/:monster', function(req, res) {
 });
 
 app.post("/simulate", function(request, response) {
-	   var parsedMonsters = monsterParser.parse(request.body.monsterList);
-	   response.send(JSON.stringify({winning_team: cController.simulateFight(parsedMonsters)}));
+	   monsterParser.parse(request.db, request.body.monsterList).then(data => {
+	     response.send(JSON.stringify({winning_team: cController.simulateFight(data)}));
+	   });
  });
 
 app.listen(port, () => console.log(`Node API is listening on port ${port}!`));

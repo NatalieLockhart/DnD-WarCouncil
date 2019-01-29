@@ -21,7 +21,6 @@ class Monster {
 			this.actions = monsterObject.actions;
 			this.challenge_rating = monsterObject.challenge_rating;
 			this.initiative = this.getInitiative();
-			this.team = monsterObject.team;
 		}
 	}
 	
@@ -32,6 +31,10 @@ class Monster {
 	
 	getAbilityModifier(abilityScore){
 		return Math.floor((abilityScore-10)/2);
+	}
+	
+	setTeam(team){
+		this.team = team;
 	}
 	
 }
