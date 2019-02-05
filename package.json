@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "mocha",
-	"db" : "mongod --dbpath data",
-	"start": "node server.js"
+    "db": "mongod --dbpath data",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
