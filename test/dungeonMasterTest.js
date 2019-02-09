@@ -42,17 +42,16 @@ describe('dungeonMaster.determineTarget(attacker, monsterList)', function (){
 	it('should return a target monster from the monsterList that is different than the attacker', function () {
 		
 		//1. ARRANGE				
-		var mockMonster = new Monster(mockJSONMonsterList.monsterList[0]);
-		var mockMonster1 = new Monster(mockJSONMonsterList.monsterList[1]);
-		var monsterList = monsterParser.parse(mockJSONMonsterList.monsterList);
+		var mockMonster1 = new Monster(mockJSONMonsterList.monsterList[0]);
+		mockMonster1.setTeam(1);
+		var mockMonster2 = new Monster(mockJSONMonsterList.monsterList[1]);
+		mockMonster2.setTeam(2);
+		var monsterList = [mockMonster1, mockMonster2];
 		
 		//2. ACT
-		var result = dungeonMaster.determineTarget(mockMonster, monsterList);
-		
-		//set the initiatives to be the same because they're randomly generated
-		result.initiative = mockMonster1.initiative;
+		var result = dungeonMaster.determineTarget(mockMonster1, monsterList);
 		
 		//3. ASSERT
-		expect(result).to.deep.equal(mockMonster1);
+		expect(result).to.deep.equal(mockMonster2);
 	});
 });

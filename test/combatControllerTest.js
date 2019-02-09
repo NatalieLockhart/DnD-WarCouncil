@@ -10,18 +10,19 @@ describe('combatController.simulateFight(monsterList)', function (){
 	it('should return the number of the winning team when a list of Monster objects is passed to it', function () {
 	
 		//1. ARRANGE
-		var monsterList = monsterParser.parse(mockJSONMonsterList.monsterList);
+		var monster1 = new Monster(mockJSONMonsterList.monsterList[0]);
+		monster1.setTeam(1);
+		var monster2 = new Monster(mockJSONMonsterList.monsterList[1]);
+		monster2.setTeam(2);
+		
+		var monsterList = [monster1, monster2];
+		var winningTeam = 2; //Team 2, the Tarrasque, who will always win
 		
 		//2. ACT
-		var winner = new Monster(monsterList[1]);
 		var result = cController.simulateFight(monsterList);
 		
-		//set the initiatives to be the same because they're randomly generated
-		winner.initiative = result.initiative;
-		
 		//3. ASSERT
-		//hint: the winner is always gonna be the tarrasque
-		expect(result).to.equal(winner.team);
+		expect(result).to.equal(winningTeam);
 	});
 });
 
