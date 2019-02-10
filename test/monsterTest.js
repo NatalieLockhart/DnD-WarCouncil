@@ -46,7 +46,7 @@ describe('monster.constructor(monsterObject)', function (){
 		});
 		
 		//2. ACT
-		var result = new Monster(mockJSONMonsterList.monsterList[0]);
+		var result = new Monster(mockJSONMonsterList[0]);
 		
 		//set the initiatives to be the same because they are randomly generated
 		result.initiative = 1;

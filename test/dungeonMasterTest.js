@@ -26,7 +26,7 @@ describe('dungeonMaster.pickRandomMove(monster)', function (){
             damage_bonus: 2
 	      };
 		
-		var mockMonster = new Monster(mockJSONMonsterList.monsterList[0]);
+		var mockMonster = new Monster(mockJSONMonsterList[0]);
 		
 		//2. ACT
 		var result = dungeonMaster.pickRandomMove(mockMonster);
@@ -42,9 +42,9 @@ describe('dungeonMaster.determineTarget(attacker, monsterList)', function (){
 	it('should return a target monster from the monsterList that is different than the attacker', function () {
 		
 		//1. ARRANGE				
-		var mockMonster1 = new Monster(mockJSONMonsterList.monsterList[0]);
+		var mockMonster1 = new Monster(mockJSONMonsterList[0]);
 		mockMonster1.setTeam(1);
-		var mockMonster2 = new Monster(mockJSONMonsterList.monsterList[1]);
+		var mockMonster2 = new Monster(mockJSONMonsterList[1]);
 		mockMonster2.setTeam(2);
 		var monsterList = [mockMonster1, mockMonster2];
 		

@@ -1,6 +1,5 @@
 var mockJSONMonsterList = 
-{
-"monsterList" : [
+[
 {
     "name": "Goblin",
     "hit_points": 7,
@@ -99,6 +98,6 @@ var mockJSONMonsterList =
     "initiative": 2,
 	"team": 2
 }
-]};
+];
 
 module.exports = mockJSONMonsterList;

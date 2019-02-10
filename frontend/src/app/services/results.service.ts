@@ -18,19 +18,12 @@ export class ResultsService {
   constructor(private http:HttpClient) { }
 
   monsterList : Array<Monster> = [];
-  jsonTest : string;
-
-  mockData : any = { "monsterList" : [
-    {"name": "Goblin", "team": 1}, 
-    {"name": "Tarrasque", "team":2}
-  ]};
 
   //call the Node API to get the results of the battle
   simulateBattle(monster1, monster2): Observable<any>{
       this.monsterList.push(monster1);
       this.monsterList.push(monster2);
-      this.jsonTest = JSON.stringify(this.monsterList);     
 
-      return this.http.post(this.simulateURL, "{ \"monsterList\": " + this.jsonTest + "}", httpOptions);
+      return this.http.post(this.simulateURL, JSON.stringify(this.monsterList), httpOptions);
   }
 }

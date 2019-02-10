@@ -7,10 +7,10 @@ describe('monsterParser.parse(monsterList)', function (){
 	it('should return a list of Monster objects when given a list of JSON monsters', function () {
 		
 		//1. ARRANGE
-		var mockMonster = new Monster(mockJSONMonsterList.monsterList[0]);
+		var mockMonster = new Monster(mockJSONMonsterList[0]);
 		
 		//2. ACT
-		var result = monsterParser.parse(mockJSONMonsterList.monsterList);
+		var result = monsterParser.parse(mockJSONMonsterList);
 		
 		//set the initiatives to be the same because initiative is randomly generated when a Monster() is created
 		mockMonster.initiative = 1;

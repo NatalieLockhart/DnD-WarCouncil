@@ -10,9 +10,9 @@ describe('combatController.simulateFight(monsterList)', function (){
 	it('should return the number of the winning team when a list of Monster objects is passed to it', function () {
 	
 		//1. ARRANGE
-		var monster1 = new Monster(mockJSONMonsterList.monsterList[0]);
+		var monster1 = new Monster(mockJSONMonsterList[0]);
 		monster1.setTeam(1);
-		var monster2 = new Monster(mockJSONMonsterList.monsterList[1]);
+		var monster2 = new Monster(mockJSONMonsterList[1]);
 		monster2.setTeam(2);
 		
 		var monsterList = [monster1, monster2];

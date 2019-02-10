@@ -5,7 +5,7 @@
     <form (ngSubmit)="onSubmit()" #monsterForm="ngForm">
       <div class="form-group">
         <label for="Monster1">Monster 1</label>
-        <select class="form-control" id="Monster1" required [(ngModel)]="model.name" name="name" #monster1>
+        <select class="form-control" id="Monster1" required [(ngModel)]="model.name" name="name">
           <option *ngFor="let monster of monsters" [value]="monster">{{monster}}</option>
         </select>
         <input name="team1" required [(ngModel)]="model.team" name="team" #team1>
@@ -13,7 +13,7 @@
 
       <div class="form-group">
         <label for="Monster2">Monster 2</label>
-        <select class="form-control" id="Monster2" required [(ngModel)]="model1.name" name="name" #monster2>
+        <select class="form-control" id="Monster2" required [(ngModel)]="model1.name" name="name">
           <option *ngFor="let monster of monsters" [value]="monster">{{monster}}</option>
         </select>
         <input name="team2" required [(ngModel)]="model1.team" #team2>
