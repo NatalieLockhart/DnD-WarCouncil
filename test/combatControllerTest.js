@@ -63,7 +63,7 @@ describe('combatController.continueCombat(monsterList)', function (){
 });
 
 
-describe('getInitiativeOrder(monsterList)', function (){
+describe('combatController.getInitiativeOrder(monsterList)', function (){
 	it('should sort the monster list from highest to lowest initiatives values', function () {
 		//1. ARRANGE
 		var monsterList = [{initiative: 0}, {initiative:1}, {initiative:2}];
@@ -76,7 +76,7 @@ describe('getInitiativeOrder(monsterList)', function (){
 	});
 });
 
-describe('entityCanAct(monsterList[i])', function (){
+describe('combatController.entityCanAct(monsterList[i])', function (){
 	it('should return true if the passed Monster has health higher than 0', function () {
 		//1. ARRANGE
 		var mockMonster = {hit_points:1};
@@ -100,7 +100,7 @@ describe('entityCanAct(monsterList[i])', function (){
 	});
 });
 
-describe('attackRollsAreSuccessful(attacker, attack, target)', function (){
+describe('combatController.attackRollsAreSuccessful(attacker, attack, target, d20)', function (){
 	it('should return true if the attack roll is higher than the target\'s armor class', function () {
 		//1. ARRANGE
 		var mockTarget = { armor_class:0 };
@@ -113,7 +113,7 @@ describe('attackRollsAreSuccessful(attacker, attack, target)', function (){
         };
 		
 		//2. ACT
-		var result = cController.attackRollsAreSuccessful("", attack, mockTarget);
+		var result = cController.attackRollsAreSuccessful("", attack, mockTarget, 20);
 		
 		//3. ASSERT
 		expect(result).to.be.true;
@@ -131,14 +131,14 @@ describe('attackRollsAreSuccessful(attacker, attack, target)', function (){
         };
 		
 		//2. ACT
-		var result = cController.attackRollsAreSuccessful("", attack, mockTarget);
+		var result = cController.attackRollsAreSuccessful("", attack, mockTarget, 1);
 		
 		//3. ASSERT
 		expect(result).to.be.false;
 	});
 });
 
-describe('dealDamage(target, attack)', function (){
+describe('combatController.dealDamage(target, attack)', function (){
 	it('should do damage to the target and return the damage value', function () {
 		//1. ARRANGE
 		var mockMonster = {hit_points:100};
@@ -158,7 +158,7 @@ describe('dealDamage(target, attack)', function (){
 	});
 });
 
-describe('determineVictoriousTeam(monsterList)', function (){
+describe('combatController.determineVictoriousTeam(monsterList)', function (){
 	it('should determine the team that won the battle', function () {
 		//1. ARRANGE
 		var monsterList = [{hit_points:1, team:1}, {hit_points:0, team:2}];

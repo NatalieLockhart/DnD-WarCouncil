@@ -13,8 +13,8 @@ class dungeonMaster {
 	//later on, we will be more selective of the target, but for now, let's pick the first monster in the list that isn't the attacker.
 	determineTarget(attacker, monsterList){
 		for(var i = 0; i < monsterList.length; i++){
-			//later this will need to be more in depth - a target with identical properties as the attacker will not be selected
-			if (monsterList[i].name != attacker.name){
+			//later this will need to be more in depth - a target will be selected based on aggro, challenge rating, closeness to death, etc.
+			if (monsterList[i].team != attacker.team && monsterList[i].hit_points > 0){
 				return monsterList[i];
 			}
 		}

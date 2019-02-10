@@ -21,20 +21,26 @@ class combatController {
 		  var target = dungeonMaster.determineTarget(attacker, monsterList);
 		  var attack = dungeonMaster.pickRandomMove(attacker);
 		  var action = new Action(attacker, "attacks", target, attack);
-			
-		  if(this.attackRollsAreSuccessful(attacker, attack, target)){
-			var damageDealt = this.dealDamage(target, attack);
+		  var d20 = dice.rollD20();
+		  if(d20 == 20 || this.attackRollsAreSuccessful(attacker, attack, target, d20)){
+			if(d20 == 20){
+			  action.recordCrit(true);
+			}
 			action.recordHit(true);
-			action.recordDamage(damageDealt);
+		    var damageDealt = this.dealDamage(target, attack, d20);
+		    action.recordDamage(damageDealt);
+			
+			if(target.hit_points <= 0 ){
+			  action.recordKill(true);
+			}
 		  }
 		  else{
 			action.recordHit(false);
 			action.recordDamage(0);
 		  }
-	  }
-	  
-	  action.finalize();
-	  actionArray.push(action);
+		  action.finalize();
+		  actionArray.push(action);
+	    }
 	  i++;
 	  if(i > monsterList.length-1) {i = 0};
     }  	  
@@ -48,13 +54,13 @@ class combatController {
 	
 	//check if there is more than one team with a living monster on it - if so, the battle is ongoing
 	continueCombat(monsterList){
-	  var livingTeam = 0;
+	  var livingTeam = -1;
 	  for(var a = 0; a < monsterList.length; a++){
 		  if(monsterList[a].hit_points > 0){
-			  if(livingTeam == 0){
+			  if(livingTeam == -1){
 			    livingTeam = monsterList[a].team;
 			  }
-			  if(monsterList[a].team != livingTeam){
+			  else if(monsterList[a].team != livingTeam){
 			    return true;
 			  }
 		  }
@@ -78,23 +84,24 @@ class combatController {
 	
 	//check if attack rolls break through the target's AC
 	//many attacks gain bonuses to hit based on the attacker's stats, so it should be passed in. however, we'll worry about that later
-	//many attacks also don't have specific dice rolls to hit, so we'll have to worry about that later too. for now, we'll just ignore an attack like that
-	attackRollsAreSuccessful(attacker, attack, target){
-		if(attack.damage_dice == undefined) { return false; }
-		if(dice.rollD20() + attack.attack_bonus > target.armor_class){
+	attackRollsAreSuccessful(attacker, attack, target, d20){
+		if(d20 + attack.attack_bonus > target.armor_class){
 			return true;
 		}
-		
 		return false;
 	}
 	
 	//if the target can roll to save, do so here. otherwise roll the attack die's damage or mitigated damage. 
 	//later on, we will need to keep statuses and resistances in mind in this method.
-	dealDamage(target, attack){
+	//many attacks don't have specific dice rolls to hit, so we'll have to worry about that later too. for now, we'll just ignore an attack like that
+	dealDamage(target, attack, d20){
+	  if(attack.damage_dice == undefined) { return 0; }
 	  var damageDiceString = attack.damage_dice.split('d');
-	  var numberOfDice = damageDiceString[0];
+	  var numberOfDice = 0;
+	  if(d20 == 20){ numberOfDice = damageDiceString[0] * 2; }
+	  else{ numberOfDice = damageDiceString[0]; }
 	  var typeOfDice = damageDiceString[1];
-	  var damage = parseInt(attack.damage_bonus);
+	  var damage = attack.damage_bonus ? parseInt(attack.damage_bonus) : 0;
 	  
 	  for (var b = 0; b < numberOfDice; b++){
 	    damage += dice.diceParser(typeOfDice);

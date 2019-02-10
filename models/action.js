@@ -16,12 +16,24 @@ class Action{
 		this.hit = bool;
 	}
 	
+	recordKill(bool){
+		this.kill = bool;
+	}
+	
+	recordCrit(bool){
+		this.crit = bool;
+	}
+	
 	finalize(){
 		this.finalStatement = `${this.target1} ${this.description} ${this.target2} using ${this.attack}. `;
 		if(this.hit){
-		  this.finalStatement += "It hits, ";
+		  if(this.crit) { this.finalStatement += "It crits, "; }
+		  else { this.finalStatement += "It hits, "; }
 		  if(this.damage > 0){
 		    this.finalStatement += `dealing ${this.damage} damage!`;
+			if(this.kill){
+				this.finalStatement += ` ${this.target2} has been felled!`;
+			}
 		  }
 		  else{
 		    this.finalStatement += "but deals no damage.";
