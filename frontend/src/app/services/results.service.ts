@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Monster } from '../models/monster';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +17,20 @@ export class ResultsService {
 
   constructor(private http:HttpClient) { }
 
+  monsterList : Array<Monster> = [];
+  jsonTest : string;
+
   mockData : any = { "monsterList" : [
-    { "name": "Goblin", "team": 1}, 
+    {"name": "Goblin", "team": 1}, 
     {"name": "Tarrasque", "team":2}
   ]};
 
   //call the Node API to get the results of the battle
   simulateBattle(monster1, monster2): Observable<any>{
-      return this.http.post(this.simulateURL, this.mockData);
+      this.monsterList.push(monster1);
+      this.monsterList.push(monster2);
+      this.jsonTest = JSON.stringify(this.monsterList);     
+
+      return this.http.post(this.simulateURL, "{ \"monsterList\": " + this.jsonTest + "}", httpOptions);
   }
 }
