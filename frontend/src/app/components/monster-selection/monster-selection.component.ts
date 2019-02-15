@@ -14,13 +14,12 @@ export class MonsterSelectionComponent implements OnInit {
 
   monsters = ['Goblin', 'Hobgoblin',
             'Knight', 'Tarrasque'];
-  submitted = false;
-  model = new Monster("Goblin", 1);
-  model1 = new Monster("Tarrasque", 2);
+  model = new Monster();
+  model1 = new Monster();
   battleResults = new BattleResults();
 
 
-  onSubmit(){ this.submitted = true;
+  onSubmit(){ 
     this.resultsService.simulateBattle(this.model, this.model1).subscribe(
       data => {this.battleResults.winningTeam = data.winningTeam, this.battleResults.actionList = data.actionList},
       err => console.error(err)

@@ -17,10 +17,11 @@ export class ResultsService {
 
   constructor(private http:HttpClient) { }
 
-  monsterList : Array<Monster> = [];
+  monsterList : Array<Monster>;
 
   //call the Node API to get the results of the battle
   simulateBattle(monster1, monster2): Observable<any>{
+      this.monsterList = [];
       this.monsterList.push(monster1);
       this.monsterList.push(monster2);
 
