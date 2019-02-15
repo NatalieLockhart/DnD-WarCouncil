@@ -32,7 +32,7 @@ app.get('/monsters/:monster', function(req, res) {
 
 app.post("/simulate", function(request, response) {
 	   monsterParser.parse(request.db, request.body).then(data => {
-	     response.send(JSON.stringify({winning_team: cController.simulateFight(data)}));
+	     response.send(JSON.stringify(cController.simulateFight(data)));
 	   });
  });
 

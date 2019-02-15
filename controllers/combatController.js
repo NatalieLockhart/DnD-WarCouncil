@@ -49,7 +49,11 @@ class combatController {
 	  console.log("Action " + (d+1) + ": " + actionArray[d].finalStatement);
 	}
 	
-	return this.determineVictoriousTeam(monsterList);
+	return {
+		winningTeam: this.determineVictoriousTeam(monsterList),
+		actionList: actionArray	
+	};
+	
   }
 	
 	//check if there is more than one team with a living monster on it - if so, the battle is ongoing
