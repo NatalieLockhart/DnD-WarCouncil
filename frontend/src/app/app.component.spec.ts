@@ -3,13 +3,15 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { MonsterSelectionComponent } from './components/monster-selection/monster-selection.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule
       ],
       declarations: [
         AppComponent,
