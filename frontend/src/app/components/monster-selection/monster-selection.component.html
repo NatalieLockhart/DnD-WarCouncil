@@ -1,25 +1,29 @@
 <div class="container">
   <h1>Monster Selection</h1>
-  {{diagnostic}}
-  <div [hidden]="submitted">
-    <form (ngSubmit)="onSubmit()" #monsterForm="ngForm">
-      <div class="form-group">
-        <label for="Monster1">Monster 1</label>
-        <select class="form-control" id="Monster1" required [(ngModel)]="model.name" name="name">
-          <option *ngFor="let monster of monsters" [value]="monster">{{monster}}</option>
-        </select>
-        <input name="team1" required [(ngModel)]="model.team" name="team" #team1>
-      </div>
+ <!-- {{diagnostic}} -->
+  <form (ngSubmit)="onSubmit()" #monsterForm="ngForm">
+    <div class="form-group">
+      <label for="Monster1">Monster 1</label>
+      <select class="form-control" id="Monster1" required [(ngModel)]="model.name" name="name">
+        <option *ngFor="let monster of monsters" [value]="monster">{{monster}}</option>
+      </select>
+      <input name="team1" required [(ngModel)]="model.team" name="team" #team1>
+    </div>
 
-      <div class="form-group">
-        <label for="Monster2">Monster 2</label>
-        <select class="form-control" id="Monster2" required [(ngModel)]="model1.name" name="name">
-          <option *ngFor="let monster of monsters" [value]="monster">{{monster}}</option>
-        </select>
-        <input name="team2" required [(ngModel)]="model1.team" #team2>
-      </div>
+    <div class="form-group">
+      <label for="Monster2">Monster 2</label>
+      <select class="form-control" id="Monster2" required [(ngModel)]="model1.name" name="name">
+        <option *ngFor="let monster of monsters" [value]="monster">{{monster}}</option>
+      </select>
+      <input name="team2" required [(ngModel)]="model1.team" #team2>
+    </div>
 
-      <button type="submit" class="btn btn-success" [disabled]="!monsterForm.form.valid">Submit</button>
-    </form>
+    <button type="submit" class="btn btn-success" [disabled]="!monsterForm.form.valid">Submit</button>
+  </form>
+
+  <div *ngIf="battleResults.actionList">
+    <div *ngFor="let action of battleResults.actionList"> {{action.finalStatement}}
+
+    </div>
   </div>
 </div>
