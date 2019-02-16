@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ResultsService } from '../../services/results.service';
 import { Monster } from '../../models/monster';
 import { BattleResults } from 'src/app/models/battle-results';
+import { Action } from '../../models/action';
 
 @Component({
   selector: 'app-monster-selection',
@@ -21,7 +22,7 @@ export class MonsterSelectionComponent implements OnInit {
 
   onSubmit(){ 
     this.resultsService.simulateBattle(this.model, this.model1).subscribe(
-      data => {this.battleResults.winningTeam = data.winningTeam, this.battleResults.actionList = data.actionList},
+      data => {this.battleResults.winningTeam = data.winningTeam, this.battleResults.setUpActionList(data.actionList)},
       err => console.error(err)
     );
   }
