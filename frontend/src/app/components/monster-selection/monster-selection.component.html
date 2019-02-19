@@ -1,24 +1,24 @@
-<div class="container">
+<div>
   <h1>Monster Selection</h1>
  <!-- {{diagnostic}} -->
   <form (ngSubmit)="onSubmit()" #submitForm="ngForm">
-    <div class="form-group">
+    <div>
       <label for="Monster1">Monster 1</label>
-      <select class="form-control" id="Monster1" required [(ngModel)]="model.name" name="name">
+      <select id="Monster1" required [(ngModel)]="model.name" name="name">
         <option *ngFor="let monster of monsterArray" [value]="monster">{{monster}}</option>
       </select>
       <input name="team1" required [(ngModel)]="model.team" name="team" #team1>
     </div>
 
-    <div class="form-group">
+    <div>
       <label for="Monster2">Monster 2</label>
-      <select class="form-control" id="Monster2" required [(ngModel)]="model1.name" name="name">
+      <select id="Monster2" required [(ngModel)]="model1.name" name="name">
         <option *ngFor="let monster of monsterArray" [value]="monster">{{monster}}</option>
       </select>
       <input name="team2" required [(ngModel)]="model1.team" #team2>
-    </div> 
+    </div>
 
-    <button type="submit" class="btn btn-success" [disabled]="!submitForm.form.valid">Submit</button>
+    <button type="submit"  [disabled]="!submitForm.form.valid">Submit</button>
   </form>
 
   <div *ngIf="battleResults.actionList">
@@ -26,17 +26,26 @@
   </div>
 
   <form [formGroup]="monsterForm" (ngSubmit)="onAddMonster()">
-    <div formArrayName="monsters">
-        <h3>Monsters</h3> <button (click)="addAlias()">Add Monster</button>
-      
-        <div *ngFor="let monster of monsters.controls; let i=index">
+    <div formArrayName="teams">
+        <h3>Teams</h3> <button (click)="addTeam()">Add Team</button>
+
+        <div *ngFor="let team of teams.controls; let i=index">
           <div formGroupName="{{i}}">
-            <label>MonsterName:
-              <input type="text" formControlName="monsterName">
+            <label>Team Number:
+              <input type="text" formControlName="teamNumber">
             </label>
-            <label>MonsterTeam:
-                <input type="text" formControlName="monsterTeam">
-              </label>
+
+            <div formArrayName="monsters">
+                <h5>Monsters</h5> <button (click)="addMonster(team)">Add Monster</button>
+
+                <div *ngFor="let monster of team.controls.monsters.controls; let a=index">
+                  <div formGroupName="{{a}}">
+                    <label>Monster Name:
+                      <input type="text" formControlName="monsterName">
+                    </label>
+                  </div>
+                </div> 
+            </div>
           </div>
         </div>
     </div>

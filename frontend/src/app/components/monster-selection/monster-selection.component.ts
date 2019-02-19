@@ -17,12 +17,17 @@ export class MonsterSelectionComponent implements OnInit {
             'Knight', 'Tarrasque'];
   model = new Monster();
   model1 = new Monster();
+  numberOfTeams = 1;
   battleResults = new BattleResults();
   monsterForm = this.fb.group({
-    monsters: this.fb.array([
+    teams: this.fb.array([
       this.fb.group({
-        monsterName: [''],
-        monsterTeam: ['']
+      teamNumber: [this.numberOfTeams],
+      monsters: this.fb.array([
+        this.fb.group({
+          monsterName: [''],
+        })
+      ])
       })
     ])
   });
@@ -41,14 +46,30 @@ export class MonsterSelectionComponent implements OnInit {
 
   get diagnostic() { return JSON.stringify(this.model); }
 
-  get monsters() {
-    return this.monsterForm.get('monsters') as FormArray;
+  // get monsters(team : FormArray) {
+  //   return team.get('monsters');
+  // }
+
+  get teams(){
+    return this.monsterForm.get('teams') as FormArray;
   }
 
-  addAlias() {
-    this.monsters.push(this.fb.group({
-      monsterName: [''],
-      monsterTeam: ['']
+  addMonster(team: FormArray) {
+    let monsterArray = team.get('monsters') as FormArray;
+    monsterArray.push(this.fb.group({
+      monsterName: ['']
+    }));
+  }
+
+  addTeam(){
+    this.numberOfTeams++;
+    this.teams.push(this.fb.group({
+      teamNumber: [this.numberOfTeams],
+      monsters: this.fb.array([
+        this.fb.group({
+          monsterName: ['']
+        })
+      ])
     }));
   }
 
