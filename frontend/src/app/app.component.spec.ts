@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { MonsterSelectionComponent } from './components/monster-selection/monster-selection.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 describe('AppComponent', () => {
@@ -11,6 +11,7 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         FormsModule,
+        ReactiveFormsModule,
         HttpClientModule
       ],
       declarations: [

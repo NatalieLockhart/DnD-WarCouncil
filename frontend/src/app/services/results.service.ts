@@ -14,6 +14,7 @@ export class ResultsService {
 
   simulateURL: string = "http://localhost:3000/simulate/";
   getURL: string =  "http://localhost:3000/monster/";
+  getMonsterNameListURL: string = "http://localhost:3000/monsters"
 
   constructor(private http:HttpClient) { }
 
@@ -26,5 +27,10 @@ export class ResultsService {
       this.monsterList.push(monster2);
 
       return this.http.post(this.simulateURL, JSON.stringify(this.monsterList), httpOptions);
+  }
+
+  //get the list of monster names
+  getMonsterNameList(){
+    return this.http.get(this.getMonsterNameListURL);
   }
 }

@@ -13,8 +13,7 @@ export class MonsterSelectionComponent implements OnInit {
 
   constructor(private resultsService: ResultsService, private fb: FormBuilder) { }
 
-  monsterArray = ['Goblin', 'Hobgoblin',
-            'Knight', 'Tarrasque'];
+  monsterNameList = [];
   model = new Monster();
   model1 = new Monster();
   numberOfTeams = 1;
@@ -38,6 +37,7 @@ export class MonsterSelectionComponent implements OnInit {
 
 
   onSubmit(){ 
+    console.log(this.model.name + " " + this.model.team);
     this.resultsService.simulateBattle(this.model, this.model1).subscribe(
       data => {this.battleResults.winningTeam = data.winningTeam, this.battleResults.setUpActionList(data.actionList)},
       err => console.error(err)
@@ -45,10 +45,6 @@ export class MonsterSelectionComponent implements OnInit {
   }
 
   get diagnostic() { return JSON.stringify(this.model); }
-
-  // get monsters(team : FormArray) {
-  //   return team.get('monsters');
-  // }
 
   get teams(){
     return this.monsterForm.get('teams') as FormArray;
@@ -74,6 +70,10 @@ export class MonsterSelectionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.resultsService.getMonsterNameList().subscribe(
+      data => {this.monsterNameList = data as string[]},
+      err => console.error(err)
+    );
   }
 
 }

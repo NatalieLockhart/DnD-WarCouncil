@@ -5,7 +5,7 @@
     <div>
       <label for="Monster1">Monster 1</label>
       <select id="Monster1" required [(ngModel)]="model.name" name="name">
-        <option *ngFor="let monster of monsterArray" [value]="monster">{{monster}}</option>
+        <option *ngFor="let monster of monsterNameList" [value]="monster">{{monster}}</option>
       </select>
       <input name="team1" required [(ngModel)]="model.team" name="team" #team1>
     </div>
@@ -13,7 +13,7 @@
     <div>
       <label for="Monster2">Monster 2</label>
       <select id="Monster2" required [(ngModel)]="model1.name" name="name">
-        <option *ngFor="let monster of monsterArray" [value]="monster">{{monster}}</option>
+        <option *ngFor="let monster of monsterNameList" [value]="monster">{{monster}}</option>
       </select>
       <input name="team2" required [(ngModel)]="model1.team" #team2>
     </div>
@@ -41,7 +41,9 @@
                 <div *ngFor="let monster of team.controls.monsters.controls; let a=index">
                   <div formGroupName="{{a}}">
                     <label>Monster Name:
-                      <input type="text" formControlName="monsterName">
+                      <select required name="name">
+                        <option *ngFor="let monster of monsterNameList" [value]="monster">{{monster}}</option>
+                      </select>
                     </label>
                   </div>
                 </div> 

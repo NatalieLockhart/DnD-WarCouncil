@@ -3,6 +3,7 @@ var MonsterController = require('../controllers/monsterController.js');
 
 var monsterController = new MonsterController();
 var parsedMonsterList = [];
+var monsterNames = [];
 
 //this method parses a JSON list of monsters into a list of monster objects
 exports.parse = function(db, monsterList){
@@ -24,6 +25,20 @@ exports.parse = function(db, monsterList){
 
 }
 
+//get the names of all monsters in the db and parse them so the property name is not included
+//i.e. "name": "Goblin" becomes "Goblin"
+exports.getMonsterNameList = function(db){
+  monsterNames = [];
+  return monsterController.getMonsterNameList(db).then(data => {
+	  for (var d = 0; d < data.length; d++){
+		  monsterNames.push(data[d].name);
+		}
+		return monsterNames;
+  });
+}
+
+//this method fills out the monsterList with the monster that are duplicates
+//mongoDB doesn't like to return duplicate records, so we need to do this manually
 function setUpMonstersArray(db, monsterList){
 	return monsterController.getMonsters(db, monsterList).then(data => {
 	for (var a = 0; a < monsterList.length; a++){

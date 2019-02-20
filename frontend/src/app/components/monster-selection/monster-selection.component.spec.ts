@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MonsterSelectionComponent } from './monster-selection.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -10,7 +10,7 @@ describe('MonsterSelectionComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ MonsterSelectionComponent ],
-      imports: [ FormsModule, HttpClientModule ]
+      imports: [ FormsModule, ReactiveFormsModule, HttpClientModule ]
     })
     .compileComponents();
   }));

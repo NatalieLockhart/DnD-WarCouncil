@@ -30,6 +30,12 @@ app.get('/monsters/:monster', function(req, res) {
 	});
 });
 
+app.get('/monsters', function(req,res){
+	monsterParser.getMonsterNameList(req.db).then(data => {
+		res.send(data);
+	});
+});
+
 app.post("/simulate", function(request, response) {
 	   monsterParser.parse(request.db, request.body).then(data => {
 	     response.send(JSON.stringify(cController.simulateFight(data)));
