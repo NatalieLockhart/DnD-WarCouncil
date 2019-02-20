@@ -21,12 +21,12 @@ export class ResultsService {
   monsterList : Array<Monster>;
 
   //call the Node API to get the results of the battle
-  simulateBattle(monster1, monster2): Observable<any>{
-      this.monsterList = [];
-      this.monsterList.push(monster1);
-      this.monsterList.push(monster2);
+  simulateBattle(apiObject: Monster[]): Observable<any>{
+      // this.monsterList = [];
+      // this.monsterList.push(monster1);
+      // this.monsterList.push(monster2);
 
-      return this.http.post(this.simulateURL, JSON.stringify(this.monsterList), httpOptions);
+      return this.http.post(this.simulateURL, JSON.stringify(apiObject), httpOptions);
   }
 
   //get the list of monster names

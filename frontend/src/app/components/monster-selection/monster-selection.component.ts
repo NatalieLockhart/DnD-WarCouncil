@@ -13,6 +13,7 @@ export class MonsterSelectionComponent implements OnInit {
 
   constructor(private resultsService: ResultsService, private fb: FormBuilder) { }
 
+  apiObject: Monster[];
   monsterNameList = [];
   model = new Monster();
   model1 = new Monster();
@@ -30,15 +31,20 @@ export class MonsterSelectionComponent implements OnInit {
       })
     ])
   });
-  
-  onAddMonster(){
-    console.warn(this.monsterForm.value);
+
+  parseMonsterForm(){
+    this.apiObject = [];
+    for(let team of this.monsterForm.value.teams){
+      for(var i = 0; i < team.monsters.length; i++){
+        this.apiObject.push({name: team.monsters[i].monsterName, team: team.teamNumber} as Monster);
+      }
+    }
   }
 
-
   onSubmit(){ 
-    console.log(this.model.name + " " + this.model.team);
-    this.resultsService.simulateBattle(this.model, this.model1).subscribe(
+    this.parseMonsterForm();
+    console.log(this.monsterForm.value.teams[0].monsters[0].monsterName);
+    this.resultsService.simulateBattle(this.apiObject).subscribe(
       data => {this.battleResults.winningTeam = data.winningTeam, this.battleResults.setUpActionList(data.actionList)},
       err => console.error(err)
     );    
