@@ -41,7 +41,7 @@
                 <div *ngFor="let monster of team.controls.monsters.controls; let a=index">
                   <div formGroupName="{{a}}">
                     <label>Monster Name:
-                      <select required name="name">
+                      <select required name="name" formControlName="monsterName">
                         <option *ngFor="let monster of monsterNameList" [value]="monster">{{monster}}</option>
                       </select>
                     </label>
