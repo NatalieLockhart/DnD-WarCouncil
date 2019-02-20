@@ -42,12 +42,13 @@ export class MonsterSelectionComponent implements OnInit {
   }
 
   onSubmit(){ 
+    this.removeWinningClass();
     this.parseMonsterForm();
-    console.log(this.monsterForm.value.teams[0].monsters[0].monsterName);
     this.resultsService.simulateBattle(this.apiObject).subscribe(
-      data => {this.battleResults.winningTeam = data.winningTeam, this.battleResults.setUpActionList(data.actionList)},
+      data => {this.battleResults.winningTeam = data.winningTeam, this.battleResults.setUpActionList(data.actionList), 
+        document.getElementById("team" + this.battleResults.winningTeam).classList.add('winning-team'); },
       err => console.error(err)
-    );    
+    );   
   }
 
   get diagnostic() { return JSON.stringify(this.model); }
@@ -56,14 +57,18 @@ export class MonsterSelectionComponent implements OnInit {
     return this.monsterForm.get('teams') as FormArray;
   }
 
+  //add a new monster to the given team's monster array
   addMonster(team: FormArray) {
+    this.removeWinningClass();
     let monsterArray = team.get('monsters') as FormArray;
     monsterArray.push(this.fb.group({
       monsterName: ['']
     }));
   }
 
+  //add a new team to the team array
   addTeam(){
+    this.removeWinningClass();
     this.numberOfTeams++;
     this.teams.push(this.fb.group({
       teamNumber: [this.numberOfTeams],
@@ -75,11 +80,22 @@ export class MonsterSelectionComponent implements OnInit {
     }));
   }
 
+  //remove the winning-team class from the team that won the last round. Reset the battle results
+  removeWinningClass(){
+    this.battleResults = new BattleResults();
+    var elems = document.querySelectorAll(".winning-team");
+    [].forEach.call(elems,function(el){
+      el.classList.remove("winning-team");
+    })
+  }
+
+  //get the list of all monster names to populate the monster dropdowns, and add a team to the teams array so we start with two
   ngOnInit() {
     this.resultsService.getMonsterNameList().subscribe(
       data => {this.monsterNameList = data as string[]},
       err => console.error(err)
     );
+    this.addTeam();
   }
 
 }

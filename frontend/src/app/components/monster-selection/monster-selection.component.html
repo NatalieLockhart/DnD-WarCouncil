@@ -1,37 +1,33 @@
-<div>
+<div class="main">
   <h1>Monster Selection</h1>
  <!-- {{diagnostic}} -->
 
  <form [formGroup]="monsterForm" (ngSubmit)="onSubmit()">
-    <div formArrayName="teams">
-        <h3>Teams</h3> <button type="button" (click)="addTeam()">Add Team</button>
-
+    <button type="button" (click)="addTeam()">Add Team</button>
+    <div formArrayName="teams" class="container">       
         <div *ngFor="let team of teams.controls; let i=index">
-          <div formGroupName="{{i}}">
-            <label>Team Number:
-              <input type="text" formControlName="teamNumber">
-            </label>
-
+          <br>
+          <div formGroupName="{{i}}" class="item" id="team{{i+1}}">
+            <label>Team {{team.controls.teamNumber.value}}</label>
             <div formArrayName="monsters">
-                <h5>Monsters</h5> <button type="button" (click)="addMonster(team)">Add Monster</button>
-
                 <div *ngFor="let monster of team.controls.monsters.controls; let a=index">
                   <div formGroupName="{{a}}">
-                    <label>Monster Name:
-                      <select required name="name" formControlName="monsterName">
-                        <option *ngFor="let monster of monsterNameList" [value]="monster">{{monster}}</option>
-                      </select>
-                    </label>
-                  </div>
+                    <select required name="name" formControlName="monsterName">
+                      <option *ngFor="let monster of monsterNameList" [value]="monster">{{monster}}</option>
+                    </select> 
+                  </div>                  
                 </div> 
+                <button type="button" (click)="addMonster(team)">Add Monster</button>
             </div>
           </div>
         </div>
     </div>
-    <button type="submit" [disabled]="!monsterForm.valid">Submit</button>
+    <br>
+    <button type="submit" [disabled]="!monsterForm.valid">Simulate</button>
   </form>
 
   <div *ngIf="battleResults.actionList">
+      <div>Winning team: {{battleResults.winningTeam}}</div>
       <div *ngFor="let action of battleResults.actionList"> {{action.finalStatement}}</div>
   </div>
 </div>

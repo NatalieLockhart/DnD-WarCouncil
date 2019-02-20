@@ -1,0 +1,18 @@
+.main{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.container{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.item {
+    order: 0; 
+    width: 200px;
+  }
+
+.winning-team {
+    background-color: rgb(202, 241, 202);
+}
