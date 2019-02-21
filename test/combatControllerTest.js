@@ -22,7 +22,7 @@ describe('combatController.simulateFight(monsterList)', function (){
 		var result = cController.simulateFight(monsterList);
 		
 		//3. ASSERT
-		expect(result).to.equal(winningTeam);
+		expect(result.winningTeam == winningTeam && result.actionList != undefined).to.be.true;
 	});
 });
 
