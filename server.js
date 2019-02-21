@@ -16,29 +16,23 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-// Make our db accessible to our router
-app.use(function(req,res,next){
-    req.db = db;
-    next();
-});
-
 app.get('/', (req, res) => res.send('Hello World!'));
 
 app.get('/monsters/:monster', function(req, res) {
-	mController.getMonster(req.db, req.params.monster).then(data => {
+	mController.getMonster(req.params.monster).then(data => {
 		res.send(new Monster(data[0]));
 	});
 });
 
 app.get('/monsters', function(req,res){
-	monsterParser.getMonsterNameList(req.db).then(data => {
+	monsterParser.getMonsterNameList().then(data => {
 		res.send(data);
 	});
 });
 
-app.post("/simulate", function(request, response) {
-	   monsterParser.parse(request.db, request.body).then(data => {
-	     response.send(JSON.stringify(cController.simulateFight(data)));
+app.post("/simulate", function(req, res) {
+	   monsterParser.parse(req.body).then(data => {
+	     res.send(JSON.stringify(cController.simulateFight(data)));
 	   });
  });
 

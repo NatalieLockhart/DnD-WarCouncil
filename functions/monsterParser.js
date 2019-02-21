@@ -4,9 +4,12 @@ var MonsterController = require('../controllers/monsterController.js');
 var monsterController = new MonsterController();
 var parsedMonsterList = [];
 var monsterNames = [];
+var monk = require('monk');
+  
+var db = monk('localhost:27017/monsters');
 
 //this method parses a JSON list of monsters into a list of monster objects
-exports.parse = function(db, monsterList){
+exports.parse = function(monsterList){
   if(monsterList == undefined) { return null; }
   
   //we need to sort the monster list alphabetically because mongoDB returns results alphabetically
@@ -14,7 +17,7 @@ exports.parse = function(db, monsterList){
   monsterList.sort(function(a,b){return a.name > b.name});
 
   parsedMonsterList = [];
-  return setUpMonstersArray(db,monsterList).then(data => {
+  return setUpMonstersArray(monsterList).then(data => {
 	  
 	  for(var f = 0; f < parsedMonsterList.length; f++){
 	    parsedMonsterList[f].setTeam(monsterList[f].team);
@@ -27,9 +30,9 @@ exports.parse = function(db, monsterList){
 
 //get the names of all monsters in the db and parse them so the property name is not included
 //i.e. "name": "Goblin" becomes "Goblin"
-exports.getMonsterNameList = function(db){
+exports.getMonsterNameList = function(){
   monsterNames = [];
-  return monsterController.getMonsterNameList(db).then(data => {
+  return monsterController.getMonsterNameList().then(data => {
 	  for (var d = 0; d < data.length; d++){
 		  monsterNames.push(data[d].name);
 		}
@@ -39,8 +42,8 @@ exports.getMonsterNameList = function(db){
 
 //this method fills out the monsterList with the monster that are duplicates
 //mongoDB doesn't like to return duplicate records, so we need to do this manually
-function setUpMonstersArray(db, monsterList){
-	return monsterController.getMonsters(db, monsterList).then(data => {
+function setUpMonstersArray(monsterList){
+	return monsterController.getMonsters(monsterList).then(data => {
 	for (var a = 0; a < monsterList.length; a++){
 		monster = new Monster(data.find(function(element) {
 			return element.name == monsterList[a].name;
