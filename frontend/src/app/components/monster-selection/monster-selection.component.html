@@ -1,33 +1,40 @@
 <div class="main">
-  <h1>Monster Selection</h1>
+  <h1 class="jumbotron text-center container header-bg">DND War Council - Monster Selection</h1>
  <!-- {{diagnostic}} -->
 
  <form [formGroup]="monsterForm" (ngSubmit)="onSubmit()">
-    <button type="button" (click)="addTeam()">Add Team</button>
-    <div formArrayName="teams" class="container">       
-        <div *ngFor="let team of teams.controls; let i=index">
+    <button type="button" (click)="addTeam()" class="btn btn-primary">Add Team</button>
+    <div formArrayName="teams">       
+      <div class="row">
+        <div *ngFor="let team of teams.controls; let i=index" class="col-sm-2">
           <br>
-          <div formGroupName="{{i}}" class="item" id="team{{i+1}}">
-            <label>Team {{team.controls.teamNumber.value}}</label>
-            <div formArrayName="monsters">
-                <div *ngFor="let monster of team.controls.monsters.controls; let a=index">
-                  <div formGroupName="{{a}}">
-                    <select required name="name" formControlName="monsterName">
-                      <option *ngFor="let monster of monsterNameList" [value]="monster">{{monster}}</option>
-                    </select> 
-                  </div>                  
-                </div> 
-                <button type="button" (click)="addMonster(team)">Add Monster</button>
+          <div formGroupName="{{i}}" class="item container-bg width-control" id="team{{i+1}}">
+            <h3 class="panel panel-heading width-control" id="team{{i+1}}header">Team {{team.controls.teamNumber.value}}</h3>
+            <div formArrayName="monsters" class="panel-body width-control">
+              <div *ngFor="let monster of team.controls.monsters.controls; let a=index">
+                <div formGroupName="{{a}}">
+                  <select required name="name" formControlName="monsterName" class="form-control width-control">
+                    <option *ngFor="let monster of monsterNameList" [value]="monster">{{monster}}</option>
+                  </select> 
+                </div>                  
+              </div> 
+              <br>
+              <button type="button" (click)="addMonster(team)" class="btn btn-primary btn-sm">Add Monster</button>
+              <br>
+              <br>
             </div>
           </div>
         </div>
-    </div>
+      </div>
+    </div>    
     <br>
-    <button type="submit" [disabled]="!monsterForm.valid">Simulate</button>
+    <button type="submit" [disabled]="!monsterForm.valid" ng-class="{'btn btn-success btn-lg' : monsterForm.valid}" ng-class="{'btn btn-success btn-disabled' : !monsterForm.valid}">Simulate</button>
   </form>
 
-  <div *ngIf="battleResults.actionList">
-      <div>Winning team: {{battleResults.winningTeam}}</div>
-      <div *ngFor="let action of battleResults.actionList"> {{action.finalStatement}}</div>
+  <div *ngIf="battleResults.actionList" class="container main">
+      <h2>Winner: Team {{battleResults.winningTeam}}</h2>
+      <ul class="list-group main">
+        <li class="list-group-item li-bgcolor" *ngFor="let action of battleResults.actionList"> {{action.finalStatement}}</li>
+      </ul> 
   </div>
 </div>

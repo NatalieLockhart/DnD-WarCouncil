@@ -1,11 +1,7 @@
 .main{
-    margin-left: 5%;
-    margin-right: 5%;
-}
-
-.container{
-    display:flex;
-    flex-wrap: wrap;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: #7D5C65;
 }
 
 .item {
@@ -14,5 +10,29 @@
   }
 
 .winning-team {
-    background-color: rgb(202, 241, 202);
+    background-color: rgb(202, 241, 202) !important;
+}
+
+.panel-body{
+    background-color: #ABD2FF;
+}
+
+.panel-heading{
+    background-color: #ABD2FF;
+}
+
+.width-control{
+    width:200px;
+}
+
+.container-bg{
+    background-color: #ABD2FF;
+}
+
+.li-bgcolor{
+    background-color:#736B92;
+}
+
+.header-bg{
+    background-color: #F6F4D2;
 }

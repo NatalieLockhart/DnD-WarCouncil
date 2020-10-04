@@ -46,7 +46,8 @@ export class MonsterSelectionComponent implements OnInit {
     this.parseMonsterForm();
     this.resultsService.simulateBattle(this.apiObject).subscribe(
       data => {this.battleResults.winningTeam = data.winningTeam, this.battleResults.setUpActionList(data.actionList), 
-        document.getElementById("team" + this.battleResults.winningTeam).classList.add('winning-team'); },
+        document.getElementById("team" + this.battleResults.winningTeam).classList.add('winning-team');
+        document.getElementById("team" + this.battleResults.winningTeam + "header").classList.add('winning-team'); },
       err => console.error(err)
     );   
   }
