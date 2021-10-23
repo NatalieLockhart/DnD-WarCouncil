@@ -10,7 +10,7 @@ var dice = new Dice();
 class combatController {
 	constructor() {}
 	
-	simulateFight(monsterList){
+	simulateFight(monsterList, isDetailed){
 	  this.getInitiativeOrder(monsterList);
 	  var actionArray = [];
 	  var i = 0;
@@ -20,7 +20,7 @@ class combatController {
 		  var attacker = monsterList[i];
 		  var target = dungeonMaster.determineTarget(attacker, monsterList);
 		  var attack = dungeonMaster.pickRandomMove(attacker);
-		  var action = new Action(attacker, "attacks", target, attack);
+		  var action = new Action(attacker, "attacks", target, attack, isDetailed);
 		  var d20 = dice.rollD20();
 		  if(d20 == 20 || this.attackRollsAreSuccessful(attacker, attack, target, d20)){
 			if(d20 == 20){
@@ -38,7 +38,7 @@ class combatController {
 			action.recordHit(false);
 			action.recordDamage(0);
 		  }
-		  action.finalize();
+		  action.finalize(d20 + attack.attack_bonus, target.armor_class);
 		  actionArray.push(action);
 	    }
 	  i++;

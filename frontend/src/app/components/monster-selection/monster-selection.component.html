@@ -24,6 +24,7 @@
     </div>
     <br>
     <button type="submit" [disabled]="!monsterForm.valid">Simulate</button>
+	<button type="button" (click)="onSubmit(true)" [disabled]="!monsterForm.valid">Detailed Simulate</button>
   </form>
 
   <div *ngIf="battleResults.actionList">
