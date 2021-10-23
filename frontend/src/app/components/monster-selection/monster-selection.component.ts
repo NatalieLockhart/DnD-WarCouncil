@@ -79,6 +79,13 @@ export class MonsterSelectionComponent implements OnInit {
       ])
     }));
   }
+  
+  subtractTeam(){
+	  this.removeWinningClass();
+	  this.numberOfTeams--;
+	  this.teams.pop();
+	  
+  }
 
   //remove the winning-team class from the team that won the last round. Reset the battle results
   removeWinningClass(){
