@@ -41,10 +41,10 @@ export class MonsterSelectionComponent implements OnInit {
     }
   }
 
-  onSubmit(){ 
+  onSubmit(isDetailed){ 
     this.removeWinningClass();
     this.parseMonsterForm();
-    this.resultsService.simulateBattle(this.apiObject).subscribe(
+    this.resultsService.simulateBattle(this.apiObject, isDetailed).subscribe(
       data => {this.battleResults.winningTeam = data.winningTeam, this.battleResults.setUpActionList(data.actionList), 
         document.getElementById("team" + this.battleResults.winningTeam).classList.add('winning-team'); },
       err => console.error(err)

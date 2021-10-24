@@ -13,6 +13,7 @@ const httpOptions = {
 export class ResultsService {
 
   simulateURL: string = "http://localhost:3000/simulate/";
+  simulateDetailedURL: string = "http://localhost:3000/simulateDetailed/";
   getURL: string =  "http://localhost:3000/monster/";
   getMonsterNameListURL: string = "http://localhost:3000/monsters"
 
@@ -21,12 +22,17 @@ export class ResultsService {
   monsterList : Array<Monster>;
 
   //call the Node API to get the results of the battle
-  simulateBattle(apiObject: Monster[]): Observable<any>{
+  simulateBattle(apiObject: Monster[], isDetailed: boolean): Observable<any>{
       // this.monsterList = [];
       // this.monsterList.push(monster1);
       // this.monsterList.push(monster2);
-
-      return this.http.post(this.simulateURL, JSON.stringify(apiObject), httpOptions);
+	  console.log(isDetailed);
+	  if(isDetailed){
+		return this.http.post(this.simulateDetailedURL, JSON.stringify(apiObject), httpOptions);
+	  }
+	  else{
+		return this.http.post(this.simulateURL, JSON.stringify(apiObject), httpOptions);
+	  }
   }
 
   //get the list of monster names
