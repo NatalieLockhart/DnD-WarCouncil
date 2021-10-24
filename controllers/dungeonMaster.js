@@ -7,7 +7,13 @@ class dungeonMaster {
 	
 	pickRandomMove(monster){
 	    var randomMove = Math.floor(Math.random() * monster.actions.length);
-		return monster.actions[randomMove];
+		var move = monster.actions[randomMove];
+		
+		while(String(move) == "" || String(move).includes("day")){
+			randomMove = Math.floor(Math.random() * monster.actions.length);
+			move = monster.actions[randomMove];
+		}
+		return move;
 	}
 	
 	//later on, we will be more selective of the target, but for now, let's pick the first monster in the list that isn't the attacker.
