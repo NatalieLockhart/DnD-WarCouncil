@@ -17,10 +17,13 @@
                     </select> 
                   </div>                  
                 </div> 
-                <button type="button" (click)="addMonster(team)">Add Monster</button>
             </div>
+			<button type="button" (click)=addMonster(team)>+</button>
+			<button type="button" (click)=subtractMonster(team)>-</button>
           </div>
         </div>
+		<button type="button" (click)="addTeam()">+</button>
+		<button type="button" (click)="subtractTeam()">-</button>
     </div>
     <br>
     <button type="submit" [disabled]="!monsterForm.valid">Simulate</button>
