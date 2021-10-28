@@ -6,7 +6,10 @@ class dungeonMaster {
 	}
 	
 	pickRandomMove(monster){
-	    var randomMove = Math.floor(Math.random() * monster.actions.length);
+		var randomMove = "";
+		while(randomMove == "" || randomMove == "Multiattack"){
+			var randomMove = Math.floor(Math.random() * monster.actions.length);
+		}
 		return monster.actions[randomMove];
 	}
 	
